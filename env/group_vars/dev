@@ -1,0 +1,4 @@
+version: present
+argo_cd:
+  state: absent
+env: dev

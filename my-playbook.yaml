@@ -1,0 +1,29 @@
+---
+#- name: Install Prometheus
+#  hosts: localhost
+#  vars_files:
+#    - "./vars/{{ env }}.yml"
+#  tasks:
+#  - name: Deploy Grafana chart from local path
+#    kubernetes.core.helm:
+#      name: test
+#      chart_ref: ./argo-cd
+#      release_namespace: monitoring
+#      create_namespace: true
+#      state: "{{argo_cd.state}}"
+- name: Create namespace
+  hosts: localhost
+
+  tasks:
+  - name: Create a k8s namespace
+    kubernetes.core.k8s:
+      name: testing
+      api_version: v1
+      kind: Namespace
+      state: "{{argo_cd.state}}"
+  - name: Create a k8s namespace env
+    kubernetes.core.k8s:
+      name: testing
+      api_version: v1
+      kind: Namespace
+      state: "{{env}}"
